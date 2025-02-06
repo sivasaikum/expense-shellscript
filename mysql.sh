@@ -38,7 +38,7 @@ dnf list installed mysql-server &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
-    dnf install mysql -y &>>$LOG_FILE_NAME
+    dnf install mysql-server -y &>>$LOG_FILE_NAME
     VALIDATE $? "mysql installing"
     
 else
