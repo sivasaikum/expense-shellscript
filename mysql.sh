@@ -34,16 +34,19 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf list installed mysql-server &>>$LOG_FILE_NAME
+# dnf list installed mysql-server &>>$LOG_FILE_NAME
 
-if [ $? -ne 0 ]
-then
-    dnf install mysql-server -y &>>$LOG_FILE_NAME
-    VALIDATE $? "mysql server installing"
+# if [ $? -ne 0 ]
+# then
+#     dnf install mysql-server -y &>>$LOG_FILE_NAME
+#     VALIDATE $? "mysql server installing"
     
-else
-    echo -e "MYSQL is already ... $G INSTALLED $N "
-fi
+# else
+#     echo -e "MYSQL is already ... $G INSTALLED $N "
+# fi
+
+dnf install mysql-server -y &>>$LOG_FILE_NAME
+VALIDATE $? "mysql server installing"
 
 systemctl enable mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling mysqld server"
