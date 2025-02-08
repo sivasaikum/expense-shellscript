@@ -43,7 +43,7 @@ VALIDATE $? "Enabling new nodejs version : 20 "
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-id expense 
+id expense &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
@@ -53,7 +53,7 @@ else
     echo -e "expense user is alredy $Y EXISTS $N"
 fi
 
-mkdir /app &>>$LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "Creating App Directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
