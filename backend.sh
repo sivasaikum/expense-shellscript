@@ -34,46 +34,46 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Disabling default nodejs version"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling new nodejs version : 20 "
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-useradd expense
+useradd expense &>>$LOG_FILE_NAME
 VALIDATE $? "Expense user is created"
 
-mkdir /app
+mkdir /app &>>$LOG_FILE_NAME
 VALIDATE $? "Creating App Directory"
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Downloading App code to App Directory"
 
 cd /app
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOG_FILE_NAME
 VALIDATE $? "UnZiping the backend application"
 
 cd /app
-npm install
+npm install &>>$LOG_FILE_NAME
 VALIDATE $? "Installing dependencies"
 
 cp /home/ec2-user/expense-shellscript/backend.service /etc/systemd/system/backend.service
 
-dnf install mysql -y
+dnf install mysql -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Mysql Client"
 
-mysql -h mysql.jobsearchindia.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h mysql.jobsearchindia.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE_NAME
 VALIDATE $? "Loading Transactions Schema"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE_NAME
 VALIDATE $? "Daemon reload"
 
-systemctl enable backend
+systemctl enable backend &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling backend"
 
-systemctl restart backend
+systemctl restart backend &>>$LOG_FILE_NAME
 VALIDATE $? "Restarting Backend"
 
