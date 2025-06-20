@@ -2,7 +2,7 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-06cd04d955630159e"
-INSTANCES=("mongodb","redis","mysql","rabbitmq","catalogue","user","cart","shipping","payment","dispatch","frontend")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 ZONE_ID="Z07583031PEET0FZTRC5C"
 DOMAIN_NAME="jobsearchindia.online"
 
